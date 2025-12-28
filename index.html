@@ -392,8 +392,8 @@
             };
 
             try {
-                // IMPORTANT: Changed port to 8001 as per backend update
-                const res = await fetch("http://127.0.0.1:8001/predict", {
+                // Use relative URL so it works in production and localhost
+                const res = await fetch("/predict", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
