@@ -21,10 +21,17 @@ le_married.classes_ = np.array(['No', 'Yes'])
 le_residence = LabelEncoder()
 le_residence.classes_ = np.array(['Rural', 'Urban'])
 
+from fastapi.responses import FileResponse
+
 # FastAPI app
 app = FastAPI()
 
-# Allow CORS so frontend can call API
+# Serve the frontend
+@app.get("/")
+def read_root():
+    return FileResponse("index.html")
+
+# Allow CORS so frontend can call API (kept for safety, though less needed if served from same origin)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],        # allow all frontends
